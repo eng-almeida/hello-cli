@@ -1,5 +1,5 @@
 {
-  "name": "survey",
+  "name": "@eng-almeida/survey",
   "version": "0.0.0",
   "description": "oclif example Hello World CLI",
   "author": "Joao Almeida",
