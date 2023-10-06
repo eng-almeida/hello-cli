@@ -14,11 +14,11 @@ oclif example Hello World CLI
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g survey
+$ npm install -g @eng-almeida/survey
 $ survey COMMAND
 running command...
 $ survey (--version)
-survey/0.0.0 darwin-x64 node-v18.15.0
+@eng-almeida/survey/0.0.0 darwin-x64 node-v18.15.0
 $ survey --help [COMMAND]
 USAGE
   $ survey COMMAND
