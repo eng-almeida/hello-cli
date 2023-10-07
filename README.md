@@ -348,3 +348,14 @@ DESCRIPTION
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v3.8.3/src/commands/plugins/update.ts)_
 <!-- commandsstop -->
+
+
+### Run command:
+### Collect metadata
+### Fetch survey markdown
+
+Github
+survey run --authenticationToken 123asd --platform github --owner --repo --pullRequestId
+
+Gitlab
+survey run --authenticationToken 123asd --platform gitlab --projectId --pullRequestId
