@@ -35,13 +35,15 @@ export class GitLabApi implements PlatformApi {
   }
 
   async getPullRequest() {
-    // TODO type GitLabResp
+    // TODO GitLab types
     const { data } = await this.instance.get<any, { data: any }>(`/merge_requests/${this.pullRequestId}`);
     return { targetBranch: data.target_branch, sourceBranch: data.source_branch, user: data.author.id }
   }
 
   async createPullRequestComment(body: string) {
-    // TODO https://docs.gitlab.com/ee/api/notes.html#create-new-merge-request-note
+    return this.instance.post<any, { data: any }>(`/merge_requests/${this.pullRequestId}/notes`, {
+      body
+    });
   }
 }
   
