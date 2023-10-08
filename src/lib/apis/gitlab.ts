@@ -6,6 +6,8 @@ import { PlatformApi, GitLabApiParams } from './api';
 const assert = require('node:assert');
 
 export class GitLabApi implements PlatformApi {
+  static displayName = 'GitLab'
+
   readonly authenticationToken: string
 
   projectId: string;

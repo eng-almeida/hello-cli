@@ -5,6 +5,8 @@ import type { PlatformApi, GitHubApiParams } from "./api";
 const assert = require('node:assert');
 
 export class GitHubApi implements PlatformApi {
+  static displayName = 'GitHub'
+
   readonly authenticationToken: string
   repo: {
     owner: string;
@@ -24,7 +26,7 @@ export class GitHubApi implements PlatformApi {
     assert(this.repo.owner, 'GitHub owner was not provided');
     assert(this.repo.repo, 'GitHub repository name was not provided');
 
-    this.pullRequestId = Number(flags.pullRequestId) || context.payload.pull_request?.number || 1
+    this.pullRequestId = Number(flags.pullRequestId) || context.payload.pull_request?.number || 2
     assert(this.pullRequestId, 'Pull request id was not provided');
   }
   
