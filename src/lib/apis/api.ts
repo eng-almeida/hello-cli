@@ -1,19 +1,12 @@
-export interface CiPlatformApi {
-  /**
-   * 
-   */
-  authenticationToken: string;
-  /**
-   * 
-   */
+type PullRequestResponse = {
+  targetBranch: string, 
+  sourceBranch: string, 
+  user: string | number 
+}
+
+export interface PlatformApi {
   pullRequestId: number | string;
-  /**
-   * 
-   */
-  listPullRequestDiff(): Promise<any>,
-  /**
-   * 
-   */
+  getPullRequest(): Promise<PullRequestResponse>,
   createPullRequestComment(body: string): Promise<any>
 }
 

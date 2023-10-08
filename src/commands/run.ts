@@ -1,15 +1,14 @@
 import {Args, Command, Flags} from '@oclif/core'
-import { context } from "@actions/github";
-import { GitHubApi } from '../lib/platforms/github-api';
-import { GitLabApi } from '../lib/platforms/gitlab-api';
+import { GitHubApi } from '../lib/apis/github';
+import { GitLabApi } from '../lib/apis/gitlab';
 
 function getPlatform() {
   if(process.env.GITLAB_CI) {
-    return GitLabApi.name
+    return 'GitLab'
   }
 
   if(process.env.GITHUB_ACTIONS) {
-    return GitHubApi.name
+    return 'GitHub'
   }
 }
 
@@ -40,12 +39,14 @@ export default class Run extends Command {
       
     if(platform === 'GitLab') {
       const gitlabApi = new GitLabApi(flags)
-      const pull = await gitlabApi.listPullRequestDiff();
+      const pull = await gitlabApi.getPullRequest();
       this.log(JSON.stringify(pull))
     } else if(platform === 'GitHub') {
       const githubApi = new GitHubApi(flags);
-      // const pull = await githubApi.listPullRequestDiff();
-      // this.log(JSON.stringify(pull))
+      const pull = await githubApi.getPullRequest();
+      this.log(JSON.stringify(pull))
+    } else {
+      this.error('Platform not found')
     }
     
   }

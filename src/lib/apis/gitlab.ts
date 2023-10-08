@@ -1,11 +1,11 @@
-/* eslint-disable camelcase */
+ 
 
 import axios, { AxiosInstance } from 'axios';
-import { CiPlatformApi, GitLabApiParams } from './platform';
+import { PlatformApi, GitLabApiParams } from './api';
 // eslint-disable-next-line unicorn/prefer-module
 const assert = require('node:assert');
 
-export class GitLabApi implements CiPlatformApi {
+export class GitLabApi implements PlatformApi {
   readonly authenticationToken: string
 
   projectId: string;
@@ -31,30 +31,11 @@ export class GitLabApi implements CiPlatformApi {
       },
     });  
   }
-  
-  mapToStatus({ new_file, renamed_file, deleted_file }: { new_file: boolean, renamed_file: boolean, deleted_file: boolean }) {
-    if(new_file) {
-      return 'added'
-    }
- 
-    if(renamed_file) {
-      return 'renamed'
-    }
 
-    if(deleted_file) {
-      return 'removed'
-    }
-
-    return 'modified'
-  }
-
-  async listPullRequestDiff() {
-    const { data } = await this.instance.get<string, { data: Array<any> }>(`/merge_requests/${this.pullRequestId}/diffs`);
-    return data?.map(({ new_path, diff, new_file, renamed_file, deleted_file  }) => ({
-        filename: new_path,
-        patch: diff,
-        status: this.mapToStatus({ new_file, renamed_file, deleted_file })
-      }))
+  async getPullRequest() {
+    // TODO type GitLabResp
+    const { data } = await this.instance.get<any, { data: any }>(`/merge_requests/${this.pullRequestId}`);
+    return { targetBranch: data.target_branch, sourceBranch: data.source_branch, user: data.author.id }
   }
 
   async createPullRequestComment(body: string) {

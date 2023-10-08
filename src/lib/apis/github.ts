@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
 import { context, getOctokit } from "@actions/github";
-import type { CiPlatformApi, GitHubApiParams } from "./platform";
+import type { PlatformApi, GitHubApiParams } from "./api";
 // eslint-disable-next-line unicorn/prefer-module
 const assert = require('node:assert');
 
-export class GitHubApi implements CiPlatformApi {
+export class GitHubApi implements PlatformApi {
   readonly authenticationToken: string
   repo: {
     owner: string;
@@ -28,14 +28,13 @@ export class GitHubApi implements CiPlatformApi {
     assert(this.pullRequestId, 'Pull request id was not provided');
   }
   
-  async listPullRequestDiff() {
+  async getPullRequest() {
     const octokit = getOctokit(this.authenticationToken);
-    const { data } = await  octokit.rest.pulls.listFiles({ 
+    const { data } = await  octokit.rest.pulls.get({ 
       ...this.repo,
       pull_number: this.pullRequestId,
-      per_page: 100
     });
-    return data.map(({ filename, status, patch }) => ({ filename, status, patch }))
+    return { targetBranch: data.head.ref, sourceBranch: data.base.ref, user: data.user?.id || '' }
   }
 
   async createPullRequestComment(body: string) {
