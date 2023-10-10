@@ -6,6 +6,6 @@ export const localGetDiff = async (base: string, head: string) => {
     '--name-only',
     `${base}...${head}`,
   ]
-  return spawnAsPromise('git', args, { env: process.env, shell: true })
+  return spawnAsPromise('cd ../gh-action && git', args, { env: process.env, shell: true })
 }
     

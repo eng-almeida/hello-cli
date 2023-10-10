@@ -30,6 +30,6 @@ export default class Run extends Command {
 
     const Api = platformAPI[platform];
     const core = new CliCore(new Api(flags));
-    core.init();
+    core.run();
   }
 }
