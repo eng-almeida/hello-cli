@@ -1,15 +1,17 @@
 import { GitHubApi } from "./github";
 import { GitLabApi } from "./gitlab";
 
-type PullRequestResponse = {
-  targetBranch: string, 
-  sourceBranch: string, 
-  user: string | number 
+type NormalizedPullRequestData = { 
+  author_email: string | null, 
+  refs: { 
+    target_branch: string, 
+    source_branch: string 
+  } 
 }
 
 export interface PlatformApi {
   pullRequestId: number | string;
-  getPullRequest(): Promise<PullRequestResponse>,
+  getPullRequest(): Promise<any>,
   createPullRequestComment(body: string): Promise<any>
 }
 

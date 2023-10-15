@@ -18,7 +18,6 @@ export class GitHubApi implements PlatformApi {
   constructor(flags: GitHubApiParams) {
     this.authenticationToken = flags.authenticationToken || process.env.GITHUB_TOKEN || '';
     assert(this.authenticationToken, 'Authentication token was not provided');
-    
     this.repo = {
       owner: flags.owner || context.repo.owner || 'eng-almeida',
       repo: flags.repo || context.repo.repo ||  'gh-action'
@@ -32,11 +31,29 @@ export class GitHubApi implements PlatformApi {
   
   async getPullRequest() {
     const octokit = getOctokit(this.authenticationToken);
-    const { data } = await  octokit.rest.pulls.get({ 
+    const { data: pullRequestData } = await  octokit.rest.pulls.get({ 
       ...this.repo,
       pull_number: this.pullRequestId,
     });
-    return { targetBranch: data.head.ref, sourceBranch: data.base.ref, user: data.user?.id || '' }
+
+    if(pullRequestData.user) {
+      const { data: userData } = await octokit.rest.users.getByUsername({ username: pullRequestData.user?.login})
+      return { 
+        refs: {
+          target_branch: pullRequestData.head.ref, 
+          source_branch: pullRequestData.base.ref, 
+        },
+        author_email: userData.email 
+      }
+    }
+
+    return { 
+      refs: {
+        target_branch: pullRequestData.head.ref, 
+        source_branch: pullRequestData.base.ref, 
+      },
+      author_email: null
+    }
   }
 
   async createPullRequestComment(body: string) {

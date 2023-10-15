@@ -28,23 +28,19 @@ export class CliCore {
   async run() {
     const pullRequest = await this.api.getPullRequest();
     const diff = await localGetDiff(pullRequest.sourceBranch, pullRequest.targetBranch);
-    console.log(diff)
-    this.getSurvey()
+    this.getCampaign(pullRequest.author_email)
   }
 
-  async getSurvey() {
+  async getCampaign(authorEmail: string | null) {
     const { data } = await this.instance.post('/api/public/campaigns', {
-      "organizationId": this.organizationId, "secretKey": process.env.SECRET_KEY, "projectId": this.projectId
+      "organizationId": this.organizationId, 
+      "secretKey": this.secretKey, 
+      "projectId": this.projectId, 
+      "user": { 
+        "email": authorEmail
+      } 
     })
     this.api.createPullRequestComment(`Hey! Here is your survey: ${data.campaign_url}`)
-  }
-
-  postMetadata() {
-    
-  }
-
-  collectMetadata () {
-    
   }
 
 }
