@@ -43,8 +43,8 @@ export class GitLabApi implements PlatformApi {
     const commitsData = await this.api.MergeRequests.allCommits(this.projectId, Number(this.pullRequestId))
     return { 
       refs: { 
-        target_branch: pullRequestData.target_branch, 
-        source_branch: pullRequestData.source_branch 
+        target_branch: pullRequestData.target_branch as string, 
+        source_branch: pullRequestData.source_branch as string
       }, 
       author_email: getMostFrequentEmail(commitsData) 
     };

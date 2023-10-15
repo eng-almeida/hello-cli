@@ -27,7 +27,7 @@ export class CliCore {
 
   async run() {
     const pullRequest = await this.api.getPullRequest();
-    const diff = await localGetDiff(pullRequest.sourceBranch, pullRequest.targetBranch);
+    const diff = await localGetDiff(pullRequest.refs.source_branch, pullRequest.refs.target_branch);
     this.getCampaign(pullRequest.author_email)
   }
 

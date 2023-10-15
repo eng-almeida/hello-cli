@@ -11,7 +11,7 @@ type NormalizedPullRequestData = {
 
 export interface PlatformApi {
   pullRequestId: number | string;
-  getPullRequest(): Promise<any>,
+  getPullRequest(): Promise<NormalizedPullRequestData>,
   createPullRequestComment(body: string): Promise<any>
 }
 
