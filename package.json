@@ -22,7 +22,7 @@
     "@gitbeaker/rest": "^39.19.0",
     "@oclif/core": "^3",
     "@oclif/plugin-help": "^5",
-    "@oclif/plugin-plugins": "^3.8.3",
+    "@oclif/plugin-plugins": "^3.9.1",
     "axios": "^1.5.1",
     "eslint-config-prettier": "^9.0.0"
   },
