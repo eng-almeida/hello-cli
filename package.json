@@ -24,7 +24,8 @@
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^3.8.3",
     "axios": "^1.5.1",
-    "eslint-config-prettier": "^9.0.0"
+    "eslint-config-prettier": "^9.0.0",
+    "simple-git": "^3.20.0"
   },
   "devDependencies": {
     "@oclif/prettier-config": "^0.2.1",
@@ -33,6 +34,7 @@
     "@types/mocha": "^9.0.0",
     "@types/node": "^18",
     "chai": "^4",
+    "danger": "^11.3.0",
     "eslint": "^8.50.0",
     "eslint-config-oclif": "^5",
     "eslint-config-oclif-typescript": "^2.0.1",
