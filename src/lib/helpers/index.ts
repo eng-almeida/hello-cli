@@ -11,7 +11,7 @@ export const spawnAsPromise = async (command: string, args?: readonly string[] |
     })
 
     child.stderr.on('data', (data) => {
-      throw new Error(data.toString())
+      throw new Error(data)
     })
 
     child.on('close', (code) => {
