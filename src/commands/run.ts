@@ -27,7 +27,7 @@ export default class Run extends Command {
       'src/lib/core/index.ts'
     ]
     const envVariables = {
-      DANGER_GITHUB_API_TOKEN: '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',
+      DANGER_GITHUB_API_TOKEN: '',
       DANGER_FAKE_CI: 'true',
       DANGER_TEST_REPO: 'eng-almeida/gh-action',
       DANGER_TEST_PR: '2',
