@@ -33,7 +33,7 @@
     "@oclif/test": "^3",
     "@total-typescript/ts-reset": "^0.5.1",
     "@types/chai": "^4",
-    "@types/mocha": "^9.0.0",
+    "@types/mocha": "^9.1.1",
     "@types/node": "^18",
     "chai": "^4",
     "danger": "^11.3.0",
