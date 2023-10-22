@@ -21,6 +21,10 @@ import { dangerWrapper } from './pull-request';
     }
   }
 
-  const campaignUrl = await getCampaignUrl(campaignIds);
-  createComment(campaignUrl);
+  try {
+    const campaignUrl = await getCampaignUrl(campaignIds);
+    createComment(campaignUrl ?? 'Could not find a campaign');
+  } catch {
+    console.log('Error finding a campaign');
+  }
 })()
