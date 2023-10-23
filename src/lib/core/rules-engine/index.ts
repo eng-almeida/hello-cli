@@ -1,6 +1,7 @@
 import '@total-typescript/ts-reset'
 import { Engine } from 'json-rules-engine'
 import { getCondition } from './conditions';
+import { minimatch } from 'minimatch'
 
 export enum RuleType {
   MATCH_PATH = 'matchpath',
@@ -19,13 +20,27 @@ export type CampaignRules = {
 }
 
 const engine = new Engine();
-// Custom operator to process PR diff
+
+/**
+ * "includes" operator: looks for a string in a diff
+ */
 engine.addOperator<string, string>('includes', (factValue, jsonValue) => {
   if (factValue.length === 0) {
     return false;
   }
 
   return factValue[0].includes(jsonValue);
+});
+
+/**
+ * "glob" operator: checks if any file in the given array matches the specified glob pattern.
+ */
+engine.addOperator<string[], string>('glob', (factValue, jsonValue) => {
+  if (factValue.length === 0) {
+    return false;
+  }
+
+  return factValue.some(fact => minimatch(fact, jsonValue));
 });
 
 function mapToRuleProperties(rules: CampaignRules[]) {

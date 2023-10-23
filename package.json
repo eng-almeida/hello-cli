@@ -22,7 +22,8 @@
     "@oclif/plugin-plugins": "^3.8.3",
     "axios": "^1.5.1",
     "eslint-config-prettier": "^9.0.0",
-    "json-rules-engine": "^6.4.2"
+    "json-rules-engine": "^6.4.2",
+    "minimatch": "^9.0.3"
   },
   "devDependencies": {
     "@oclif/prettier-config": "^0.2.1",
