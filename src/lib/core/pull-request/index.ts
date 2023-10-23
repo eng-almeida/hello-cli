@@ -1,35 +1,5 @@
 import type { DangerDSLType, MarkdownString } from 'danger'
-
-interface Map {
-  [key: string]: string | undefined
-}
-
-const programmingLanguages: Map = {
-  "js": "javascript",
-  "jsx": "javascript",
-  "mjs": "javascript",
-  "ts": "typescript",
-  "tsx": "typescript",
-  "java": "java",
-  "class": "java",
-  "kt": "kotlin",
-  "kts": "kotlin",
-  "py": "python",
-  "ex": "elixir",
-  "exs": "elixir",
-  "eex": "elixir"
-};
-
-function mapToFileToProgrammingLanguage(files: string[]) {
-  return new Set(files.map((file) => {
-    const extension = file.split('.').pop();
-    if(extension) {
-      return programmingLanguages[extension]
-    }
-
-    return null
-  }).filter(Boolean))
-}
+import { mapToFileToProgrammingLanguage } from './utils';
 
 export function dangerWrapper(danger: DangerDSLType, message: (message: MarkdownString, file?: string, line?: number) => void) {
 
@@ -57,7 +27,7 @@ export function dangerWrapper(danger: DangerDSLType, message: (message: Markdown
   }
 
   return {
-    getPullRequestData: extractPullRequestData,
+    extractPullRequestData,
     createComment
   }
 }

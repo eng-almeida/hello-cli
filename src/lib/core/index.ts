@@ -9,8 +9,8 @@ import { dangerWrapper } from './pull-request';
   const campaignsRules = await getCampaignsRulesFromProject();
   const engine = createNoctuaEngine(campaignsRules)
 
-  const { getPullRequestData, createComment } = dangerWrapper(danger, message);
-  const pullRequestData = await getPullRequestData();
+  const { extractPullRequestData, createComment } = dangerWrapper(danger, message);
+  const pullRequestData = await extractPullRequestData();
   
   const { events } = await engine.run(pullRequestData);
   
