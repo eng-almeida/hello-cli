@@ -19,29 +19,6 @@ export type CampaignRules = {
   rules: Array<Rule[]>
 }
 
-const engine = new Engine();
-
-/**
- * "includes" operator: looks for a string in a diff
- */
-engine.addOperator<string, string>('includes', (factValue, jsonValue) => {
-  if (factValue.length === 0) {
-    return false;
-  }
-
-  return factValue[0].includes(jsonValue);
-});
-
-/**
- * "glob" operator: checks if any file in the given array matches the specified glob pattern.
- */
-engine.addOperator<string[], string>('glob', (factValue, jsonValue) => {
-  if (factValue.length === 0) {
-    return false;
-  }
-
-  return factValue.some(fact => minimatch(fact, jsonValue));
-});
 
 function mapToRuleProperties(rules: CampaignRules[]) {
   return rules.map(({ rules: andRule }) => ({
@@ -52,6 +29,29 @@ function mapToRuleProperties(rules: CampaignRules[]) {
 }
 
 export function createNoctuaEngine(campaignsRules: CampaignRules[]) {
+  const engine = new Engine();
+  /**
+   * "includes" operator: looks for a string in a diff
+   */
+  engine.addOperator<string, string>('includes', (factValue, jsonValue) => {
+    if (factValue.length === 0) {
+      return false;
+    }
+
+    return factValue[0].includes(jsonValue);
+  });
+
+  /**
+   * "glob" operator: checks if any file in the given array matches the specified glob pattern.
+   */
+  engine.addOperator<string[], string>('glob', (factValue, jsonValue) => {
+    if (factValue.length === 0) {
+      return false;
+    }
+
+    return factValue.some(fact => minimatch(fact, jsonValue));
+  });
+
   const rulesProperties =  mapToRuleProperties(campaignsRules);
   const rulesWithConditions = campaignsRules.map((rule, index) => ({
     ...rule,
