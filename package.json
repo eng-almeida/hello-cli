@@ -2,7 +2,7 @@
   "name": "@eng-almeida/survey",
   "version": "0.0.1",
   "description": "oclif example Hello World CLI",
-  "author": "Joao Almeida",
+  "author": "Noctua",
   "bin": {
     "survey": "./bin/run"
   },
