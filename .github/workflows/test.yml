@@ -9,7 +9,7 @@ on:
 #     uses: oclif/github-workflows/.github/workflows/unitTest.yml@main
 
 jobs:
-  unit-tests:
+  build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     strategy:
