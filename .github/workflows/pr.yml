@@ -1,8 +1,8 @@
-name: tests
+name: Pull Request
+
 on:
-  push:
-    branches-ignore: [main]
-  workflow_dispatch:
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
