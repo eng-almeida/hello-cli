@@ -28,7 +28,7 @@ export default class Run extends Command {
     const projectId = flags?.projectId || process.env.NOCTUA_PROJECT_ID;
     assert(projectId, 'Project id was not provided');
 
-    const secretKey = flags?.organizationId || process.env.NOCTUA_SECRET_KEY;
+    const secretKey = flags?.secretKey || process.env.NOCTUA_SECRET_KEY;
     assert(secretKey, 'Secret key was not provided. Read docs about to get your Noctua secret');
 
 
