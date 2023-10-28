@@ -19,7 +19,7 @@
   "dependencies": {
     "@oclif/core": "^3",
     "@oclif/plugin-help": "^5",
-    "@oclif/plugin-plugins": "^3.8.3",
+    "@oclif/plugin-plugins": "^3.9.4",
     "axios": "^1.5.1",
     "eslint-config-prettier": "^9.0.0",
     "json-rules-engine": "^6.4.2",
